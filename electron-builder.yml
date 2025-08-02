@@ -1,4 +1,4 @@
-appId: com.electron.app
+appId: com.cicishopee.app
 productName: cici-shopee
 directories:
   buildResources: build
