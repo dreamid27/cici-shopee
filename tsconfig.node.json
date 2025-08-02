@@ -7,8 +7,6 @@
   },
   "baseUrl": ".",
   "paths": {
-    "@/*": [
-      "./src/*"
-    ]
+    "@renderer/*": ["./src/renderer/*"],
   }
 }

@@ -1,5 +1,5 @@
 import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import { Button } from './components/ui/button'
 
 function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
@@ -44,18 +44,18 @@ function App(): React.JSX.Element {
           </ol>
 
           <div className="mt-5 flex flex-wrap gap-3">
-            <button
+            <Button
               onClick={ipcHandle}
               className="inline-flex items-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700 active:bg-emerald-800 transition"
             >
               Send IPC (ping)
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={openDevTools}
               className="inline-flex items-center rounded-md bg-slate-700 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800 active:bg-slate-900 transition"
             >
               Open DevTools
-            </button>
+            </Button>
             <a
               href="https://electron-vite.org/"
               target="_blank"
@@ -79,7 +79,9 @@ function App(): React.JSX.Element {
           Tip: You can always press F12 to open DevTools.
         </p>
 
-        <div className="mt-8">{/* <Versions /> */}</div>
+        <div className="mt-8">
+          <Versions />
+        </div>
       </main>
 
       <footer className="mt-auto w-full max-w-3xl px-6 py-6 text-center text-xs text-gray-500">
