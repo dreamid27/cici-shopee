@@ -33,6 +33,16 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  // Expose a simple channel to open DevTools from renderer
+  ipcMain.on('open-devtools', () => {
+    if (!mainWindow.isDestroyed()) {
+      mainWindow.webContents.openDevTools({ mode: 'detach' })
+    }
+  })
+
+  // Keep sample ping handler for renderer IPC test
+  ipcMain.on('ping', () => console.log('pong'))
 }
 
 // This method will be called when Electron has finished
@@ -48,9 +58,6 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
-
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
 
