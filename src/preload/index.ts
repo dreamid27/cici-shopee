@@ -1,8 +1,22 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { ElectronAPI } from '@electron-toolkit/preload'
+
+declare global {
+  interface Window {
+    electron: ElectronAPI
+    api: APInterface
+  }
+}
+
+export interface APInterface {
+  hello: Promise<string>
+}
 
 // Custom APIs for renderer
-const api = {}
+const api: APInterface = {
+  hello: ipcRenderer.invoke('hello')
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

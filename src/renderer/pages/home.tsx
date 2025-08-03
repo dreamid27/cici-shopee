@@ -1,9 +1,11 @@
-import Versions from './components/Versions'
-import { Button } from './components/ui/button'
+import Versions from '@renderer/components/Versions'
+import { Button } from '@renderer/components/ui/button'
+import { Link } from 'react-router'
 
-function App(): React.JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+function HomePage(): React.JSX.Element {
   const openDevTools = (): void => window.electron.ipcRenderer.send('open-devtools')
+
+  const de = window.api.hello
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 flex flex-col items-center">
@@ -45,7 +47,7 @@ function App(): React.JSX.Element {
 
           <div className="mt-5 flex flex-wrap gap-3">
             <Button
-              onClick={ipcHandle}
+              onClick={de}
               className="inline-flex items-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700 active:bg-emerald-800 transition"
             >
               Send IPC (ping)
@@ -72,6 +74,7 @@ function App(): React.JSX.Element {
             >
               Repository
             </a>
+            <Link to="/about">Go To About</Link>
           </div>
         </section>
 
@@ -91,4 +94,4 @@ function App(): React.JSX.Element {
   )
 }
 
-export default App
+export default HomePage
